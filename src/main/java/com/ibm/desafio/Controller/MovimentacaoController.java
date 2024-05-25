@@ -15,12 +15,7 @@ import java.util.Optional;
 public class MovimentacaoController {
 
     @Autowired
-    private final MovimentacaoService movimentacaoService;
-
-    @Autowired
-    public MovimentacaoController(MovimentacaoService movimentacaoService) {
-        this.movimentacaoService = movimentacaoService;
-    }
+    private MovimentacaoService movimentacaoService;
 
     @GetMapping
     public List<Movimentacao> findAll() {
@@ -36,7 +31,6 @@ public class MovimentacaoController {
         return ResponseEntity.ok(movimentacoes);
     }
 
-
     @GetMapping("/{id}")
     public ResponseEntity<Movimentacao> findById(@PathVariable Long id) {
         Optional<Movimentacao> movimentacao = movimentacaoService.findById(id);
@@ -45,19 +39,13 @@ public class MovimentacaoController {
 
     @PostMapping
     public ResponseEntity<Movimentacao> addMovimentacao(@RequestBody MovimentacaoDTO movimentacaoDTO) {
-        Movimentacao movimentacao = movimentacaoService.createMovimentacao(movimentacaoDTO);
+        Movimentacao movimentacao = movimentacaoService.createMovimentacao(movimentacaoDTO.getClienteId(), movimentacaoDTO);
         return ResponseEntity.ok(movimentacao);
     }
 
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
-        boolean exists = movimentacaoService.findById(id).isPresent();
-        if (exists) {
-            movimentacaoService.deleteById(id);
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        movimentacaoService.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }

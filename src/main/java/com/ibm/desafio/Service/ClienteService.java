@@ -5,6 +5,7 @@ import com.ibm.desafio.Entidade.Cliente;
 import com.ibm.desafio.Repository.IClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,6 +15,9 @@ public class ClienteService {
 
     @Autowired
     private IClienteRepository clienteRepository;
+
+    @Autowired
+    private MovimentacaoService movimentacaoService;
 
     public List<Cliente> findAll() {
         return clienteRepository.findAll();
@@ -27,7 +31,9 @@ public class ClienteService {
         return clienteRepository.save(cliente);
     }
 
+    @Transactional
     public void deleteById(Long id) {
+        movimentacaoService.deleteByClienteId(id);
         clienteRepository.deleteById(id);
     }
 
