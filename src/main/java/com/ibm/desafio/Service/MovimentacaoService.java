@@ -1,5 +1,7 @@
 package com.ibm.desafio.Service;
 
+import com.ibm.desafio.Controller.Dto.MovimentacaoDTO;
+import com.ibm.desafio.Entidade.Cliente;
 import com.ibm.desafio.Entidade.Movimentacao;
 import com.ibm.desafio.Repository.IMovimentacaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,9 @@ public class MovimentacaoService {
 
     @Autowired
     private IMovimentacaoRepository movimentacaoRepository;
+
+    @Autowired
+    private ClienteService clienteService;
 
     public List<Movimentacao> findAll() {
         return movimentacaoRepository.findAll();
@@ -32,5 +37,16 @@ public class MovimentacaoService {
 
     public void deleteById(Long id) {
         movimentacaoRepository.deleteById(id);
+    }
+
+    public Movimentacao createMovimentacao(MovimentacaoDTO movimentacaoDTO) {
+        Movimentacao movimentacao = new Movimentacao();
+        Cliente cliente = clienteService.findById(movimentacaoDTO.getClienteId())
+                .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
+        movimentacao.setClienteId(cliente.getId());
+        movimentacao.setTipo(movimentacaoDTO.getTipo());
+        movimentacao.setValor(movimentacaoDTO.getValor());
+        movimentacao.setDataMovimentacao(movimentacaoDTO.getDataMovimentacao());
+        return movimentacaoRepository.save(movimentacao);
     }
 }

@@ -12,7 +12,7 @@ public class Movimentacao {
     private Long id;
 
     @Column(name = "cliente_id", nullable = false)
-    private Long clienteId;  // Substituindo a relação por apenas o ID
+    private Long clienteId;
 
     @Column(nullable = false)
     private String tipo;

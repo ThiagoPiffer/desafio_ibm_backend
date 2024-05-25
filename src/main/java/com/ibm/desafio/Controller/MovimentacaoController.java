@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,12 +45,7 @@ public class MovimentacaoController {
 
     @PostMapping
     public ResponseEntity<Movimentacao> addMovimentacao(@RequestBody MovimentacaoDTO movimentacaoDTO) {
-        Movimentacao movimentacao = new Movimentacao();
-        movimentacao.setClienteId(movimentacaoDTO.getClienteId());
-        movimentacao.setTipo(movimentacaoDTO.getTipo());
-        movimentacao.setValor(movimentacaoDTO.getValor());
-        movimentacao.setDataMovimentacao(movimentacaoDTO.getDataMovimentacao());
-        movimentacao = movimentacaoService.save(movimentacao);
+        Movimentacao movimentacao = movimentacaoService.createMovimentacao(movimentacaoDTO);
         return ResponseEntity.ok(movimentacao);
     }
 

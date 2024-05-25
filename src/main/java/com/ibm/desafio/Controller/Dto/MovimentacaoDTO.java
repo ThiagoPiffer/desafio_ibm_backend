@@ -11,7 +11,6 @@ public class MovimentacaoDTO {
 
     // Construtores
     public MovimentacaoDTO() {
-        // Construtor padrão necessário para deserialização
     }
 
     public MovimentacaoDTO(Long clienteId, String tipo, BigDecimal valor, LocalDateTime dataMovimentacao) {
