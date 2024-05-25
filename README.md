@@ -14,5 +14,6 @@ CREATE TABLE Movimentacao (
     tipo NVARCHAR(10) CHECK (tipo IN ('credito', 'debito')),  
     valor DECIMAL(10, 2) NOT NULL,  
     data_movimentacao DATETIME NOT NULL,
-    FOREIGN KEY (cliente_id) REFERENCES Cliente(id)
+    FOREIGN KEY (cliente_id) REFERENCES Cliente(id) ON DELETE CASCADE
 );
+
