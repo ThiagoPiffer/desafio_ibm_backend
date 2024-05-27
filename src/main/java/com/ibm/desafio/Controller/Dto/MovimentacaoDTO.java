@@ -8,6 +8,7 @@ public class MovimentacaoDTO {
     private String tipo;
     private BigDecimal valor;
     private LocalDateTime dataMovimentacao;
+    private Long clienteIdTransferencia;
 
     // Construtores
     public MovimentacaoDTO() {
@@ -18,6 +19,7 @@ public class MovimentacaoDTO {
         this.tipo = tipo;
         this.valor = valor;
         this.dataMovimentacao = dataMovimentacao;
+
     }
 
     // Getters e Setters
@@ -51,5 +53,13 @@ public class MovimentacaoDTO {
 
     public void setDataMovimentacao(LocalDateTime dataMovimentacao) {
         this.dataMovimentacao = dataMovimentacao;
+    }
+
+    public Long getClienteIdTransferencia() {
+        return clienteIdTransferencia;
+    }
+
+    public void setClienteIdTransferencia(Long clienteIdTransferencia) {
+        this.clienteIdTransferencia = clienteIdTransferencia;
     }
 }

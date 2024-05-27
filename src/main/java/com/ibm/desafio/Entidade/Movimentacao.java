@@ -17,11 +17,14 @@ public class Movimentacao {
     @Column(nullable = false)
     private String tipo;
 
-    @Column(nullable = false, precision = 10, scale = 2)
+    @Column(nullable = false, precision = 13, scale = 2)
     private BigDecimal valor;
 
     @Column(nullable = false)
     private LocalDateTime dataMovimentacao;
+
+    @Column(name = "cliente_id_transferencia", nullable = true)
+    private Long clienteIdTransferencia;
 
     // Getters e Setters
     public Long getId() {
@@ -62,5 +65,13 @@ public class Movimentacao {
 
     public void setDataMovimentacao(LocalDateTime dataMovimentacao) {
         this.dataMovimentacao = dataMovimentacao;
+    }
+
+    public Long getClienteIdTransferencia() {
+        return clienteIdTransferencia;
+    }
+
+    public void setClienteIdTransferencia(Long clienteIdTransferencia) {
+        this.clienteIdTransferencia = clienteIdTransferencia;
     }
 }
